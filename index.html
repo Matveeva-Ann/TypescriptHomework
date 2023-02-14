@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link rel="stylesheet" href="./main.css">
+</head>
+
+<body>
+	<div class="conteiner">
+		<div class="form-box">
+			<form name="form" class="form">
+				<input type="hidden" class="recordId" name="id" data="">
+				<div class="form-element">
+					<label for="login" class="form-lable"><span>Login</span></label>
+					<input type="text" id="login" name="login" class="form-input formLogin" placeholder="Enter login" required>
+				</div>
+				<div class="form-element">
+					<label for="password" class="form-lable"><span>Password</span></label>
+					<input type="password" id="password" name="password" class="form-input formPassword" placeholder="Enter password" required>
+				</div>
+				<div class="form-element">
+					<label for="email" class="form-lable"><span>Email address</span></label>
+					<input type="text" id="email" name="email" class="form-input formEmail" placeholder="Enter email" required >
+				</div>
+				<p class="massage"></p>
+				<button type="submit" class="form-button">Add user</button>
+			</form>
+		</div>
+		<div class="table-box">
+			<table style="width: 100%;" class="table">
+				<thead>
+					<tr class="t-head">
+						<th>#</th>
+						<th>Login</th>
+						<th>Password</th>
+						<th>Email</th>
+						<th>Edit</th>
+						<th>Delete</th>
+					</tr>
+				</thead>
+				<tbody id="tableContent"></tbody>
+				<!-- <tr>
+					<td></td>
+				</tr> -->
+			</table>
+		</div>
+	</div>
+
+
+	<script src="./script.js"></script>
+</body>
+
+</html>
