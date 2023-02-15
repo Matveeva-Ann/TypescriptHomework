@@ -124,11 +124,11 @@ const massage = document.querySelector('.massage') as HTMLElement;
 const recordId = document.querySelector('.recordId') as HTMLInputElement;
 const tableContent = document.querySelector('#tableContent') as HTMLTableElement;
 
-let usersArr: string[] =[];
+let usersArr: User[] =[];
 let id:number = 1;
 
 class User {
-  private _id: number;
+  private _id: string;
   login: string;
   password: string;
   email: string;
@@ -138,10 +138,10 @@ class User {
     this.password = password;
     this.email = email;
   }
-  public set id(id: number) {
+  public set id(id: string) {
     this._id = id;
   }
-  public get id(): number {
+  public get id(): string {
     return this._id;
   }
 }
@@ -152,13 +152,13 @@ form.addEventListener('submit', function(event){
 })
 
 function checkСorrect (){
-  if (!regLogin.test(form[1].value) || !regPassword.test(form[2].value) || !regEmail.test(form[3].value)){
+  if (!regLogin.test((form[1] as HTMLFormElement).value) || !regPassword.test((form[2] as HTMLFormElement ).value) || !regEmail.test((form[3] as HTMLFormElement).value)){
      massage.style.display = 'block';
-     if (!regLogin.test(form[1].value)){
+     if (!regLogin.test((form[1] as HTMLFormElement).value)){
          massage.textContent = '* Login повинен складатися лише з букв';
-     }else if (!regPassword.test(form[2].value)){
+     }else if (!regPassword.test((form[2] as HTMLFormElement).value)){
          massage.textContent = '* Довжина password повинна бути більше 6 символів та не включати пробіли';
-     } else if (!regEmail.test(form[3].value)){
+     } else if (!regEmail.test((form[3] as HTMLFormElement).value)){
          massage.textContent = '* Не вірний формат Email';
      }
   }
@@ -191,9 +191,9 @@ function createArrUsers() {
     usersArr = usersArr.map(function (elem) {
       if (elem.id === userid) {
         elem.id = form[0].getAttribute("data");
-        elem.login = formData.get("login");
-        elem.password = formData.get("password");
-        elem.email = formData.get("email");
+        elem.login = String(formData.get("login"));
+        elem.password = String(formData.get("password"));
+        elem.email = String(formData.get("email"));
       } 
       return elem;
     });
@@ -233,17 +233,18 @@ function createButtonDel (){
 }
 
 tableContent.addEventListener("click", function (event): void {
-  let elemId = event.target.parentElement.parentElement.getAttribute('data');
-  if (event.target.innerText === "Delete") {
+  const target = event.target as HTMLElement
+  let elemId = target.parentElement.parentElement.getAttribute('data');
+  if (target.innerText === "Delete") {
     usersArr = usersArr.filter((elem) => elem.id !== elemId)
     createTable();
-  } else if (event.target.innerText === "Edit") {
-    const elementAccess =  event.target.parentElement.parentElement.firstElementChild;
+  } else if (target.innerText === "Edit") {
+    const elementAccess =  target.parentElement.parentElement.firstElementChild;
     butn.innerText = 'Edit data';
-    form[0].setAttribute("data", `${elemId}`)
-    form[1].value = elementAccess.nextElementSibling.textContent;
-    form[2].value = elementAccess.nextElementSibling.nextElementSibling.textContent;
-    form[3].value = elementAccess.nextElementSibling.nextElementSibling.nextElementSibling.textContent;
+    (form[0] as HTMLInputElement).setAttribute("data", `${elemId}`)
+    (form[1] as HTMLInputElement).value = elementAccess.nextElementSibling.textContent;
+    (form[2] as HTMLInputElement).value = elementAccess.nextElementSibling.nextElementSibling.textContent;
+    (form[3] as HTMLInputElement).value = elementAccess.nextElementSibling.nextElementSibling.nextElementSibling.textContent;
   }
 });
 

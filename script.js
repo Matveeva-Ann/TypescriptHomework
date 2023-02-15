@@ -73,9 +73,9 @@ function createArrUsers() {
         usersArr = usersArr.map(function (elem) {
             if (elem.id === userid) {
                 elem.id = form[0].getAttribute("data");
-                elem.login = formData.get("login");
-                elem.password = formData.get("password");
-                elem.email = formData.get("email");
+                elem.login = String(formData.get("login"));
+                elem.password = String(formData.get("password"));
+                elem.email = String(formData.get("email"));
             }
             return elem;
         });
@@ -112,16 +112,16 @@ function createButtonDel() {
     return btnDelete;
 }
 tableContent.addEventListener("click", function (event) {
-    let elemId = event.target.parentElement.parentElement.getAttribute('data');
-    if (event.target.innerText === "Delete") {
+    const target = event.target;
+    let elemId = target.parentElement.parentElement.getAttribute('data');
+    if (target.innerText === "Delete") {
         usersArr = usersArr.filter((elem) => elem.id !== elemId);
         createTable();
     }
-    else if (event.target.innerText === "Edit") {
-        const elementAccess = event.target.parentElement.parentElement.firstElementChild;
+    else if (target.innerText === "Edit") {
+        const elementAccess = target.parentElement.parentElement.firstElementChild;
         butn.innerText = 'Edit data';
-        form[0].setAttribute("data", `${elemId}`);
-        form[1].value = elementAccess.nextElementSibling.textContent;
+        form[0].setAttribute("data", `${elemId}`)(form[1]).value = elementAccess.nextElementSibling.textContent;
         form[2].value = elementAccess.nextElementSibling.nextElementSibling.textContent;
         form[3].value = elementAccess.nextElementSibling.nextElementSibling.nextElementSibling.textContent;
     }
