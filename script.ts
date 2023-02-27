@@ -240,8 +240,9 @@ tableContent.addEventListener("click", function (event): void {
     createTable();
   } else if (target.innerText === "Edit") {
     const elementAccess =  target.parentElement.parentElement.firstElementChild;
+    console.log('edit')
     butn.innerText = 'Edit data';
-    (form[0] as HTMLInputElement).setAttribute("data", `${elemId}`)
+    (form[0] as HTMLInputElement).setAttribute("data", `${elemId}`);
     (form[1] as HTMLInputElement).value = elementAccess.nextElementSibling.textContent;
     (form[2] as HTMLInputElement).value = elementAccess.nextElementSibling.nextElementSibling.textContent;
     (form[3] as HTMLInputElement).value = elementAccess.nextElementSibling.nextElementSibling.nextElementSibling.textContent;

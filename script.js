@@ -79,6 +79,7 @@ function createArrUsers() {
             }
             return elem;
         });
+        form.reset();
     }
 }
 function createTable() {
@@ -121,7 +122,8 @@ tableContent.addEventListener("click", function (event) {
     else if (target.innerText === "Edit") {
         const elementAccess = target.parentElement.parentElement.firstElementChild;
         butn.innerText = 'Edit data';
-        form[0].setAttribute("data", `${elemId}`)(form[1]).value = elementAccess.nextElementSibling.textContent;
+        form[0].setAttribute("data", `${elemId}`);
+        form[1].value = elementAccess.nextElementSibling.textContent;
         form[2].value = elementAccess.nextElementSibling.nextElementSibling.textContent;
         form[3].value = elementAccess.nextElementSibling.nextElementSibling.nextElementSibling.textContent;
     }
